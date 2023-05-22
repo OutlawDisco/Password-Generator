@@ -2,22 +2,36 @@
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+var length = Number(
+  prompt("Enter the length of your password between 8 -128 characters.")
+);
+var charType = prompt(
+  "Enter what you would like to include in your password: uppercase, lowercase, numbers, and special (for special characters)."
+);
 
-  function generatePassword() {
-    var length = 8,
-      charset = "abcdefghijklmnopqrstuvwxyz!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      retVal = "";
-    for (var i = 0, n = charset.length; i < length; ++i) {
-      retVal += charset.charAt(Math.floor(Math.random() * n));
-    }
-    return retVal;
+var passwordText = document.querySelector("#password");
+
+function password() {
+  var charGen = {
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numbers: "1234567890",
+    special: "!@#$%^&*",
+  };
+  var charSet = charGen[charType.toLowerCase()];
+  for (i = 0; i < length; i++) {
+    generate += password.charSet(Math.floor(Math.random() * charSet.length));
   }
-
-  passwordText.value = password;
+  return generate;
 }
+
+passwordText.value = password();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+function copyPassword() {
+  document.getElementById("password").select();
+  navigator.clipboard.writeText(copyText.value);
+  alert("Password copied to clipboard!" + copyText.value);
+}
